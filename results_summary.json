@@ -1,0 +1,122 @@
+{
+  "dataset": {
+    "total_samples": 232,
+    "crypto_samples": 72,
+    "noncrypto_samples": 160,
+    "n_source_programs": {
+      "crypto": 9,
+      "noncrypto": 20
+    },
+    "compile_variants": [
+      "O0",
+      "O0_pie",
+      "O0_static",
+      "O2",
+      "O2_strip",
+      "O3",
+      "Os",
+      "Os_strip"
+    ]
+  },
+  "feature_selection": {
+    "total_features_extracted": 80,
+    "selected_top_10": [
+      "crypto_string_ratio",
+      "sec_entropy_max",
+      "crypto_constant_hits",
+      "text_rotate_density",
+      "sec_rodata_entropy",
+      "sec_text_entropy",
+      "text_xor_density",
+      "sec_entropy_std",
+      "n_crypto_strings",
+      "avg_string_len"
+    ],
+    "methods": [
+      "Mutual Information",
+      "XGBoost Feature Importance",
+      "Pearson Correlation"
+    ]
+  },
+  "cross_validation": {
+    "n_folds": 5,
+    "metrics_mean": {
+      "accuracy": 0.9405405405405407,
+      "f1": 0.9070552635770028,
+      "auc": 0.9816643356643358,
+      "precision": 0.8980952380952381,
+      "recall": 0.9287878787878787,
+      "mcc": 0.8705412463700691
+    },
+    "metrics_std": {
+      "accuracy": 0.03523893192001434,
+      "f1": 0.052340889375704795,
+      "auc": 0.014976128530196172,
+      "precision": 0.11135121449953542,
+      "recall": 0.07568178026510408,
+      "mcc": 0.07193098558480872
+    }
+  },
+  "hyperparameter_tuning": {
+    "method": "GridSearchCV (5-fold stratified)",
+    "best_params": {
+      "gamma": 0.1,
+      "learning_rate": 0.1,
+      "max_depth": 5,
+      "min_child_weight": 3
+    },
+    "best_cv_f1": 0.9299047619047618
+  },
+  "final_test_evaluation": {
+    "accuracy": 0.9574468085106383,
+    "f1": 0.9333333333333333,
+    "roc_auc": 0.9583333333333334,
+    "pr_auc": 0.9457012879593525,
+    "mcc": 0.9020833333333333,
+    "confusion_matrix": [
+      [
+        31,
+        1
+      ],
+      [
+        1,
+        14
+      ]
+    ]
+  },
+  "overfitting_analysis": {
+    "train_accuracy": 0.9783783783783784,
+    "test_accuracy": 0.9574468085106383,
+    "gap": 0.02093156986774003,
+    "status": "OK"
+  },
+  "anti_overfitting_measures": [
+    "L1 regularization (reg_alpha=0.5)",
+    "L2 regularization (reg_lambda=2.0)",
+    "Shallow trees (max_depth tuned via GridSearch)",
+    "Row subsampling (subsample=0.8)",
+    "Column subsampling (colsample_bytree=0.8, colsample_bylevel=0.8)",
+    "Minimum child weight constraint (min_child_weight tuned)",
+    "Gamma / min split loss (tuned)",
+    "Stratified K-Fold CV (5 folds)",
+    "Class imbalance handling (scale_pos_weight)",
+    "Learning curve analysis"
+  ],
+  "model_params": {
+    "n_estimators": 500,
+    "subsample": 0.8,
+    "colsample_bytree": 0.8,
+    "colsample_bylevel": 0.8,
+    "reg_alpha": 0.5,
+    "reg_lambda": 2.0,
+    "scale_pos_weight": 2.245614035087719,
+    "eval_metric": "logloss",
+    "tree_method": "hist",
+    "random_state": 42,
+    "verbosity": 0,
+    "gamma": 0.1,
+    "learning_rate": 0.1,
+    "max_depth": 5,
+    "min_child_weight": 3
+  }
+}
