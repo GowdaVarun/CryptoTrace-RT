@@ -1,0 +1,76 @@
+{
+  "features": [
+    "crypto_string_ratio",
+    "sec_entropy_max",
+    "crypto_constant_hits",
+    "text_rotate_density",
+    "sec_rodata_entropy",
+    "sec_text_entropy",
+    "text_xor_density",
+    "sec_entropy_std",
+    "n_crypto_strings",
+    "avg_string_len"
+  ],
+  "feature_ranking": {
+    "crypto_string_ratio": {
+      "mi_rank": 1,
+      "xgb_rank": 2,
+      "corr_rank": 1,
+      "avg_rank": 1.3333333333333333
+    },
+    "sec_entropy_max": {
+      "mi_rank": 6,
+      "xgb_rank": 6,
+      "corr_rank": 5,
+      "avg_rank": 5.666666666666667
+    },
+    "crypto_constant_hits": {
+      "mi_rank": 7,
+      "xgb_rank": 11,
+      "corr_rank": 2,
+      "avg_rank": 6.666666666666667
+    },
+    "text_rotate_density": {
+      "mi_rank": 5,
+      "xgb_rank": 10,
+      "corr_rank": 6,
+      "avg_rank": 7.0
+    },
+    "sec_rodata_entropy": {
+      "mi_rank": 3,
+      "xgb_rank": 23,
+      "corr_rank": 7,
+      "avg_rank": 11.0
+    },
+    "sec_text_entropy": {
+      "mi_rank": 10,
+      "xgb_rank": 12,
+      "corr_rank": 10,
+      "avg_rank": 11.0
+    },
+    "text_xor_density": {
+      "mi_rank": 12,
+      "xgb_rank": 17,
+      "corr_rank": 8,
+      "avg_rank": 12.333333333333334
+    },
+    "sec_entropy_std": {
+      "mi_rank": 16,
+      "xgb_rank": 19,
+      "corr_rank": 4,
+      "avg_rank": 13.0
+    },
+    "n_crypto_strings": {
+      "mi_rank": 2,
+      "xgb_rank": 3,
+      "corr_rank": 35,
+      "avg_rank": 13.333333333333334
+    },
+    "avg_string_len": {
+      "mi_rank": 20,
+      "xgb_rank": 1,
+      "corr_rank": 23,
+      "avg_rank": 14.666666666666666
+    }
+  }
+}
