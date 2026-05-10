@@ -1,4 +1,5 @@
 venv/
 dataset/
 results/
-
+scripts/__pycache__/
+frontend/node_modules/  
