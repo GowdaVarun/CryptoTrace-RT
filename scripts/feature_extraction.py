@@ -359,7 +359,7 @@ def extract_features(binary_path: str) -> dict:
 
 def main():
     # Load metadata
-    with open("/app/binary_metadata.json") as f:
+    with open("../dataset/binary_metadata.json") as f:
         metadata = json.load(f)
     
     print(f"Extracting features from {len(metadata)} binaries...")
@@ -389,7 +389,7 @@ def main():
     df = pd.DataFrame(rows)
     
     # Save
-    df.to_csv("/app/binary_features.csv", index=False)
+    df.to_csv("../dataset/binary_features.csv", index=False)
     print(f"\nFeature extraction complete:")
     print(f"  Samples: {len(df)}")
     print(f"  Features: {len([c for c in df.columns if c not in ['binary_name','source_file','label','label_name','opt_level']])}")

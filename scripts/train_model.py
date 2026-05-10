@@ -40,7 +40,7 @@ import shap
 import warnings
 warnings.filterwarnings('ignore')
 
-RESULTS_DIR = "/app/results"
+RESULTS_DIR = "../results"
 os.makedirs(RESULTS_DIR, exist_ok=True)
 
 # ================================================================
@@ -50,8 +50,19 @@ print("=" * 70)
 print("CRYPTO BINARY DETECTION — XGBoost Pipeline")
 print("=" * 70)
 
-df = pd.read_csv("/app/binary_features.csv")
-print(f"\nDataset: {len(df)} samples")
+df_static = pd.read_csv("../dataset/binary_features.csv")
+
+# Load dynamic features if available
+dyn_file = "../dataset/dynamic_features.csv"
+if os.path.exists(dyn_file):
+    df_dyn = pd.read_csv(dyn_file)
+    # Merge on binary_name
+    df = pd.merge(df_static, df_dyn.drop('label', axis=1, errors='ignore'), on='binary_name', how='inner')
+    print(f"\nMerged Static + Dynamic Dataset: {len(df)} samples")
+else:
+    df = df_static
+    print(f"\nStatic Dataset only (dynamic features not found): {len(df)} samples")
+
 print(f"Class distribution:")
 print(df['label_name'].value_counts())
 print(f"\nCrypto ratio: {df['label'].mean():.2%}")
@@ -610,7 +621,7 @@ with open(f"{RESULTS_DIR}/results_summary.json", "w") as f:
 df.to_csv(f"{RESULTS_DIR}/crypto_binary_dataset.csv", index=False)
 
 print(f"\n{'='*70}")
-print("ALL ARTIFACTS SAVED TO /app/results/")
+print("ALL ARTIFACTS SAVED TO ../results/")
 print(f"{'='*70}")
 print(f"  Model:          crypto_detector_xgboost.json")
 print(f"  Features:       top10_features.json")

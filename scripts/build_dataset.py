@@ -15,9 +15,9 @@ import subprocess
 import json
 import shutil
 
-CRYPTO_DIR = "/app/sources/crypto"
-NONCRYPTO_DIR = "/app/sources/noncrypto"
-BIN_DIR = "/app/binaries"
+CRYPTO_DIR = "../dataset/sources/crypto"
+NONCRYPTO_DIR = "../dataset/sources/noncrypto"
+BIN_DIR = "../dataset/binaries"
 os.makedirs(CRYPTO_DIR, exist_ok=True)
 os.makedirs(NONCRYPTO_DIR, exist_ok=True)
 os.makedirs(BIN_DIR, exist_ok=True)
@@ -1226,7 +1226,7 @@ print(f"Crypto: {sum(1 for m in metadata if m['label']==1)}")
 print(f"Non-crypto: {sum(1 for m in metadata if m['label']==0)}")
 
 # Save metadata
-with open("/app/binary_metadata.json", "w") as f:
+with open("../dataset/binary_metadata.json", "w") as f:
     json.dump(metadata, f, indent=2)
 
-print(f"\nMetadata saved to /app/binary_metadata.json")
+print(f"\nMetadata saved to ../dataset/binary_metadata.json")
