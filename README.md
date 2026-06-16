@@ -17,6 +17,7 @@ You will need two separate terminal windows to run the API and the UI.
 cd /home/varun/varun/CryptoTrace-RT/
 source venv/bin/activate
 pip install -r backend/requirements.txt
+docker build -f backend/Dockerfile.sandbox -t cryptotrace-sandbox:latest backend
 cd backend
 python3 app.py
 ```
@@ -30,6 +31,18 @@ npm run dev
 Navigate to `http://localhost:5173` to interact with the dashboard.
 
 *(Note: The backend dynamically profiles binaries using hardware performance counters. If you receive zeros for instruction metrics, ensure you have temporarily lowered the `perf` restriction by running: `sudo sysctl -w kernel.perf_event_paranoid=-1`)*
+
+### Runtime Sandbox
+
+Uploaded binaries are not executed directly on the host. The backend first performs static feature extraction. If explicit static crypto indicators are present, runtime execution is skipped. If no static indicators are present, the binary is run in a locked-down Docker container with network disabled, dropped Linux capabilities, a read-only root filesystem, and CPU/memory/PID limits.
+
+The default sandbox image is `cryptotrace-sandbox:latest`. The included `backend/Dockerfile.sandbox` adds `strace` and `perf` so dynamic metrics can be collected when the host permits them:
+
+```bash
+docker build -f backend/Dockerfile.sandbox -t cryptotrace-sandbox:latest backend
+```
+
+If Docker or the configured image is unavailable, the API returns zero dynamic features with sandbox metadata instead of falling back to host execution.
 
 ---
 
